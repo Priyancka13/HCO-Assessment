@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categorisation of HCOs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a3a5c;
+  --navy-light: #2a4f7a;
+  --gold: #c8963e;
+  --gold-light: #e8b86d;
+  --cream: #faf8f4;
+  --white: #ffffff;
+  --gray-50: #f8f9fa;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e6ea;
+  --gray-400: #9aa3ae;
+  --gray-600: #5a6472;
+  --gray-800: #2d3340;
+  --green: #1e7e4e;
+  --green-bg: #d4edda;
+  --teal: #0c6678;
+  --teal-bg: #d1ecf1;
+  --amber: #856404;
+  --amber-bg: #fff3cd;
+  --orange: #7c3400;
+  --orange-bg: #fde8d8;
+  --red: #721c24;
+  --red-bg: #f8d7da;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--gray-800);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.site-header {
+  background: var(--navy);
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 860px; margin: 0 auto;
+  padding: 18px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-logo {
+  font-family: 'Playfair Display', serif;
+  color: var(--white); font-size: 18px; font-weight: 600; letter-spacing: .3px;
+}
+.header-logo span { color: var(--gold-light); }
+.score-pill {
+  display: flex; gap: 10px; align-items: center;
+}
+.pill-score {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+  color: var(--white); font-size: 13px; font-weight: 500;
+}
+.pill-score span { color: var(--gold-light); font-weight: 600; }
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: 36px 24px 34px;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  color: var(--gold-light); font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--white); font-size: 28px; font-weight: 600;
+  margin-bottom: 8px;
+}
+.hero p { color: rgba(255,255,255,.65); font-size: 14px; }
+
+/* ── Intro section ── */
+.intro-card {
+  background: var(--white); border-radius: 12px;
+  box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden;
+}
+.intro-banner {
+  background: var(--navy); padding: 18px 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.intro-banner-icon {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(200,150,62,.25); border: 1px solid rgba(200,150,62,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.intro-banner-text h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--white); font-size: 17px; font-weight: 600; margin-bottom: 2px;
+}
+.intro-banner-text p { color: rgba(255,255,255,.6); font-size: 12px; }
+.intro-body { padding: 24px 28px; }
+.intro-para {
+  font-size: 13px; color: var(--gray-600); line-height: 1.75;
+  margin-bottom: 16px;
+}
+.intro-para:last-of-type { margin-bottom: 0; }
+.intro-pillars {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+  margin: 20px 0;
+}
+.pillar {
+  border-radius: var(--radius); padding: 14px 16px;
+  border: 1px solid var(--gray-200);
+}
+.pillar-icon { font-size: 20px; margin-bottom: 6px; }
+.pillar-title { font-size: 13px; font-weight: 500; color: var(--gray-800); margin-bottom: 3px; }
+.pillar-pts { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+.pillar-sub { font-size: 11px; color: var(--gray-400); line-height: 1.4; }
+.pillar.cap { background: #f0f8ff; border-color: #bee5fb; }
+.pillar.cap .pillar-pts { color: var(--teal); }
+.pillar.con { background: #fffdf0; border-color: #f5e5b0; }
+.pillar.con .pillar-pts { color: var(--amber); }
+.pillar.geo { background: #f0fff6; border-color: #b8e6cc; }
+.pillar.geo .pillar-pts { color: var(--green); }
+.intro-categories { margin: 20px 0 0; }
+.cat-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-top: 10px; }
+.cat-item { border-radius: var(--radius); padding: 8px 10px; text-align: center; }
+.cat-item-score { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.cat-item-name { font-size: 10px; line-height: 1.3; }
+.intro-note {
+  background: var(--gray-50); border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px; margin-top: 18px;
+  font-size: 12px; color: var(--gray-600); line-height: 1.6;
+}
+.intro-divider {
+  border: none; border-top: 1px solid var(--gray-100); margin: 18px 0;
+}
+.intro-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 14px; }
+.intro-step { text-align: center; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy); color: var(--white);
+  font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 6px;
+}
+.step-text { font-size: 11px; color: var(--gray-600); line-height: 1.4; }
+
+/* ── Score Dashboard ── */
+.score-dashboard {
+  max-width: 860px; margin: -22px auto 0; padding: 0 24px;
+  position: relative; z-index: 10;
+}
+.score-cards {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+}
+.sc {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 14px 16px;
+  text-align: center; border-top: 3px solid var(--gray-200);
+  transition: border-color .3s;
+}
+.sc.total { border-top-color: var(--navy); }
+.sc.cap { border-top-color: var(--teal); }
+.sc.con { border-top-color: var(--gold); }
+.sc.geo { border-top-color: var(--green); }
+.sc-label { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+.sc-num { font-size: 26px; font-weight: 500; color: var(--gray-800); line-height: 1; }
+.sc-max { font-size: 12px; color: var(--gray-400); }
+.sc-badge {
+  display: inline-block; margin-top: 6px;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+  background: var(--gray-100); color: var(--gray-600);
+}
+
+/* ── Progress bar ── */
+.progress-section {
+  max-width: 860px; margin: 14px auto 0; padding: 0 24px;
+}
+.progress-track {
+  background: var(--gray-200); height: 6px; border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--navy));
+  transition: width .5s ease; width: 0%;
+}
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--gray-400); margin-bottom: 5px;
+}
+
+/* ── Main layout ── */
+.main { max-width: 860px; margin: 24px auto 40px; padding: 0 24px; }
+
+/* ── Section card ── */
+.section-card {
+  background: var(--white); border-radius: 12px;
+  box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden;
+}
+.section-head {
+  padding: 16px 24px; border-bottom: 1px solid var(--gray-100);
+  display: flex; align-items: center; gap: 12px;
+}
+.section-icon {
+  width: 36px; height: 36px; border-radius: var(--radius);
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; color: var(--white); font-size: 15px;
+  flex-shrink: 0;
+}
+.section-title { font-size: 15px; font-weight: 500; color: var(--gray-800); }
+.section-sub { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
+.section-pts {
+  margin-left: auto; background: var(--navy);
+  color: var(--white); font-size: 11px; font-weight: 500;
+  padding: 3px 10px; border-radius: 20px;
+}
+.section-body { padding: 20px 24px; }
+
+/* ── NABH banner ── */
+.nabh-banner {
+  background: #e8f4fd; border: 1px solid #bee5fb;
+  border-radius: var(--radius); padding: 12px 16px;
+  margin-bottom: 16px; font-size: 13px; color: #0c5460;
+  display: none;
+}
+.nabh-banner.show { display: block; }
+.nabh-tag {
+  display: inline-block; background: #1a3a5c; color: #fff;
+  font-size: 10px; padding: 2px 8px; border-radius: 20px;
+  margin-left: 6px; vertical-align: middle; font-weight: 500;
+}
+
+/* ── Form fields ── */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+.field-label {
+  font-size: 12px; font-weight: 500; color: var(--gray-600);
+  margin-bottom: 5px; display: block;
+}
+.field-hint { font-size: 11px; color: var(--gray-400); margin-bottom: 5px; }
+.field-weight {
+  font-size: 11px; color: var(--gray-400); font-weight: 400;
+}
+input[type="text"], input[type="number"], input[type="email"], input[type="tel"], select {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--gray-200); border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  color: var(--gray-800); background: var(--white);
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none; -webkit-appearance: none;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239aa3ae' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  padding-right: 30px; cursor: pointer;
+}
+input:focus, select:focus {
+  outline: none; border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(26,58,92,.12);
+}
+select:disabled { background-color: var(--gray-50); cursor: not-allowed; color: var(--gray-400); }
+.field-answered select { border-color: #28a745; }
+
+/* ── Declaration ── */
+.declare-wrap {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 16px 20px; background: var(--gray-50);
+  border-radius: var(--radius); margin-top: 4px;
+}
+.declare-wrap input[type="checkbox"] {
+  width: 16px; height: 16px; min-width: 16px; cursor: pointer; margin-top: 2px;
+}
+.declare-text { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+
+/* ── Submit button ── */
+.submit-wrap { text-align: center; margin-top: 8px; }
+.btn-submit {
+  background: var(--navy); color: var(--white);
+  border: none; border-radius: var(--radius);
+  padding: 14px 48px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer;
+  transition: background .2s, transform .1s;
+  letter-spacing: .3px;
+}
+.btn-submit:hover { background: var(--navy-light); }
+.btn-submit:active { transform: scale(.98); }
+.btn-submit:disabled { background: var(--gray-400); cursor: not-allowed; }
+.submit-note { font-size: 12px; color: var(--gray-400); margin-top: 10px; }
+
+/* ── Score Result Panel ── */
+.result-panel {
+  display: none; background: var(--white);
+  border-radius: 12px; box-shadow: var(--shadow);
+  overflow: hidden; margin-bottom: 20px;
+}
+.result-panel.show { display: block; }
+.result-header { background: var(--navy); padding: 24px 32px; }
+.result-header-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.result-hospital { color: rgba(255,255,255,.65); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.result-name { color: var(--white); font-family: 'Playfair Display', serif; font-size: 22px; margin-top: 3px; }
+.result-date { color: rgba(255,255,255,.45); font-size: 12px; text-align: right; }
+.result-score-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.rsc {
+  background: rgba(255,255,255,.1); border-radius: var(--radius);
+  padding: 12px 10px; text-align: center;
+}
+.rsc-label { font-size: 10px; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+.rsc-num { font-size: 24px; font-weight: 600; color: var(--white); }
+.rsc-max { font-size: 11px; color: rgba(255,255,255,.45); }
+.rsc.total-sc { background: rgba(200,150,62,.25); border: 1px solid rgba(200,150,62,.4); }
+.rsc.total-sc .rsc-num { color: var(--gold-light); font-size: 32px; }
+
+.result-body { padding: 24px 32px; }
+.category-banner {
+  text-align: center; padding: 14px;
+  border-radius: var(--radius); margin-bottom: 20px;
+  border: 2px solid;
+}
+.cat-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.cat-value { font-size: 20px; font-weight: 600; }
+
+.param-breakdown { margin-bottom: 20px; }
+.param-breakdown-title {
+  font-size: 12px; font-weight: 500; color: var(--gray-400);
+  text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px;
+}
+.param-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--gray-100);
+  font-size: 12px;
+}
+.param-row:last-child { border-bottom: none; }
+.param-name { flex: 1; color: var(--gray-600); }
+.param-answer { flex: 2; color: var(--gray-800); font-size: 11px; }
+.param-score-bar { width: 80px; height: 5px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+.param-score-fill { height: 100%; border-radius: 3px; background: var(--navy); }
+.param-pts { width: 40px; text-align: right; color: var(--navy); font-weight: 500; font-size: 12px; }
+
+.result-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+.btn-print {
+  background: var(--navy); color: var(--white); border: none;
+  border-radius: var(--radius); padding: 11px 28px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: background .2s;
+}
+.btn-print:hover { background: var(--navy-light); }
+.btn-new {
+  background: transparent; color: var(--navy);
+  border: 1px solid var(--navy); border-radius: var(--radius);
+  padding: 11px 28px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s;
+}
+.btn-new:hover { background: var(--gray-50); }
+
+/* ── Sending state ── */
+.sending-msg {
+  text-align: center; padding: 14px;
+  font-size: 13px; color: var(--gray-600);
+}
+.sending-msg.ok { color: var(--green); }
+.sending-msg.err { color: var(--red); }
+
+/* ── Print styles ── */
+@media print {
+  .site-header, .hero, .score-dashboard, .progress-section,
+  .intro-card, .section-card, .result-actions, .sending-msg { display: none !important; }
+  .result-panel { box-shadow: none !important; border: 1px solid #ccc; }
+  body { background: white; }
+}
+
+@media (max-width: 600px) {
+  .score-cards { grid-template-columns: repeat(2,1fr); }
+  .field-grid { grid-template-columns: 1fr; }
+  .result-score-grid { grid-template-columns: repeat(2,1fr); }
+  .hero h1 { font-size: 22px; }
+  .intro-pillars { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: repeat(2,1fr); }
+  .intro-steps { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ STICKY HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">Categorisation of <span>HCOs</span></div>
+    <div class="score-pill">
+      <div class="pill-score">Score: <span id="hdr-score">—</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-eyebrow">Healthcare Provider Categorization Assessment</div>
+  <h1>HCO Assessment &amp; Scoring</h1>
+  <p>Complete all sections to receive your Categorization score — shown instantly on submission.</p>
+</div>
+
+<!-- ══ SCORE DASHBOARD ══ -->
+<div class="score-dashboard">
+  <div class="score-cards">
+    <div class="sc total">
+      <div class="sc-label">Total Score</div>
+      <div class="sc-num"><span id="d-total">—</span></div>
+      <div class="sc-max">out of 100</div>
+      <div class="sc-badge" id="d-badge">Not submitted yet</div>
+    </div>
+    <div class="sc cap">
+      <div class="sc-label">Capability</div>
+      <div class="sc-num"><span id="d-cap">—</span></div>
+      <div class="sc-max">out of 40</div>
+    </div>
+    <div class="sc con">
+      <div class="sc-label">Conduct</div>
+      <div class="sc-num"><span id="d-con">—</span></div>
+      <div class="sc-max">out of 40</div>
+    </div>
+    <div class="sc geo">
+      <div class="sc-label">Geography</div>
+      <div class="sc-num"><span id="d-geo">—</span></div>
+      <div class="sc-max">out of 20</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROGRESS ══ -->
+<div class="progress-section">
+  <div class="progress-meta">
+    <span id="prog-fields">0 of 18 parameters answered</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-bar"></div></div>
+</div>
+
+<!-- ══ MAIN FORM ══ -->
+<main class="main">
+
+<!-- SCORE RESULT (shown after submit) -->
+<div class="result-panel" id="result-panel">
+  <div class="result-header">
+    <div class="result-header-top">
+      <div>
+        <div class="result-hospital">Categorization Assessment</div>
+        <div class="result-name" id="res-name">—</div>
+      </div>
+      <div class="result-date" id="res-date"></div>
+    </div>
+    <div class="result-score-grid">
+      <div class="rsc total-sc">
+        <div class="rsc-label">Total Score</div>
+        <div class="rsc-num" id="res-total">—</div>
+        <div class="rsc-max">/100</div>
+      </div>
+      <div class="rsc">
+        <div class="rsc-label">Capability</div>
+        <div class="rsc-num" id="res-cap">—</div>
+        <div class="rsc-max">/40</div>
+      </div>
+      <div class="rsc">
+        <div class="rsc-label">Conduct</div>
+        <div class="rsc-num" id="res-con">—</div>
+        <div class="rsc-max">/40</div>
+      </div>
+      <div class="rsc">
+        <div class="rsc-label">Geography</div>
+        <div class="rsc-num" id="res-geo">—</div>
+        <div class="rsc-max">/20</div>
+      </div>
+    </div>
+  </div>
+  <div class="result-body">
+    <div class="category-banner" id="res-cat-banner">
+      <div class="cat-label">Categorization</div>
+      <div class="cat-value" id="res-cat">—</div>
+    </div>
+
+    <div class="param-breakdown">
+      <div class="param-breakdown-title">Capability Parameters</div>
+      <div id="cap-breakdown"></div>
+    </div>
+    <div class="param-breakdown">
+      <div class="param-breakdown-title">Conduct Parameters</div>
+      <div id="con-breakdown"></div>
+    </div>
+    <div class="param-breakdown">
+      <div class="param-breakdown-title">Geography</div>
+      <div id="geo-breakdown"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-print" onclick="window.print()">⬇ Print / Save PDF</button>
+      <button class="btn-new" onclick="resetForm()">Submit Another</button>
+    </div>
+    <div class="sending-msg" id="sending-msg"></div>
+  </div>
+</div>
+
+<!-- ════ INTRODUCTION ════ -->
+<div class="intro-card">
+  <div class="intro-banner">
+    <div class="intro-banner-icon">📄</div>
+    <div class="intro-banner-text">
+      <h2>About This Assessment</h2>
+      <p>Healthcare Organisation (HCO) Categorization Scoring System — Version 1.0</p>
+    </div>
+  </div>
+  <div class="intro-body">
+
+    <p class="intro-para">
+      This categorization assessment is designed to provide a structured, objective, and transparent approach for categorising healthcare providers based on their operational capabilities, conduct performance, and geographic context.
+    </p>
+    <p class="intro-para">
+      It provides an objective, data-driven score out of <strong>100 points</strong> based on 18 parameters across three dimensions — Capability, Conduct, and Geography.
+    </p>
+    <p class="intro-para">
+      The score helps to categorise hospitals consistently, enabling faster and fairer negotiations between payers and providers.
+    </p>
+
+    <div class="intro-pillars">
+      <div class="pillar cap">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-title">Capability</div>
+        <div class="pillar-pts">40 pts</div>
+        <div class="pillar-sub">Infrastructure, clinical depth, accreditation, IT systems &amp; academic programmes (11 parameters)</div>
+      </div>
+      <div class="pillar con">
+        <div class="pillar-icon">✓</div>
+        <div class="pillar-title">Conduct</div>
+        <div class="pillar-pts">40 pts</div>
+        <div class="pillar-sub">Claims acceptance, TAT compliance, payment completeness, fraud controls &amp; scheme participation (6 parameters)</div>
+      </div>
+      <div class="pillar geo">
+        <div class="pillar-icon">📍</div>
+        <div class="pillar-title">Geography</div>
+        <div class="pillar-pts">20 pts</div>
+        <div class="pillar-sub">Hospital location tier — Rural / Remote to Top Metro (1 parameter)</div>
+      </div>
+    </div>
+
+    <hr class="intro-divider">
+
+    <div style="font-size:12px;font-weight:500;color:var(--gray-400);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Categories</div>
+    <div class="cat-grid">
+      <div class="cat-item" style="background:#d4edda">
+        <div class="cat-item-score" style="color:#155724">85 – 100</div>
+        <div class="cat-item-name" style="color:#155724">A* — Preferred Empanelled</div>
+      </div>
+      <div class="cat-item" style="background:#d1ecf1">
+        <div class="cat-item-score" style="color:#0c5460">70 – 84</div>
+        <div class="cat-item-name" style="color:#0c5460">A — Standard Empanelled</div>
+      </div>
+      <div class="cat-item" style="background:#fff3cd">
+        <div class="cat-item-score" style="color:#856404">55 – 69</div>
+        <div class="cat-item-name" style="color:#856404">B — Conditional Empanelled</div>
+      </div>
+      <div class="cat-item" style="background:#fde8d8">
+        <div class="cat-item-score" style="color:#7c3400">40 – 54</div>
+        <div class="cat-item-name" style="color:#7c3400">C — Probationary Review</div>
+      </div>
+      <div class="cat-item" style="background:#f8d7da">
+        <div class="cat-item-score" style="color:#721c24">0 – 39</div>
+        <div class="cat-item-name" style="color:#721c24">D — Not Empanelled</div>
+      </div>
+    </div>
+
+    <hr class="intro-divider">
+
+    <div style="font-size:12px;font-weight:500;color:var(--gray-400);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px">How to complete this form</div>
+    <div class="intro-steps">
+      <div class="intro-step">
+        <div class="step-num">1</div>
+        <div class="step-text">Check if you hold Full NABH / JCI accreditation (auto-scores 3 parameters)</div>
+      </div>
+      <div class="intro-step">
+        <div class="step-num">2</div>
+        <div class="step-text">Fill in your hospital identity and contact details</div>
+      </div>
+      <div class="intro-step">
+        <div class="step-num">3</div>
+        <div class="step-text">Answer all 18 scoring parameters honestly and accurately</div>
+      </div>
+      <div class="intro-step">
+        <div class="step-num">4</div>
+        <div class="step-text">Submit — your score card appears instantly. Print or save as PDF.</div>
+      </div>
+    </div>
+
+    <div class="intro-note">
+      <strong>Important:</strong> All responses must be accurate and supported by documentary evidence available for verification upon request. The categorizing authority reserves the right to audit, verify, and revise scores based on site visits or document checks. Providing false information may result in disqualification or delisting.
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ SECTION 0: NABH/JCI FAST-TRACK ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">★</div>
+    <div>
+      <div class="section-title">Accreditation Fast-Track</div>
+      <div class="section-sub">Full NABH / JCI holders receive automatic maximum scores on 3 parameters</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="nabh-banner" id="nabh-banner">
+      <strong>Auto-score applied:</strong> Infection Control, Data Availability, and Regulatory Compliance are each set to 5/5 based on your Full NABH / JCI accreditation. You may still change them manually if needed.
+    </div>
+    <div class="field">
+      <label class="field-label">Does your hospital hold Full NABH Accreditation or JCI (Joint Commission International) accreditation?
+        <span class="nabh-tag">Auto-scores 3 parameters</span>
+      </label>
+      <select id="nabh_jci" onchange="applyNABH()">
+        <option value="">— Select —</option>
+        <option value="Yes — Full NABH and/or JCI accredited">Yes — Full NABH and/or JCI accredited</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SECTION 1: HOSPITAL IDENTITY ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">🏥</div>
+    <div>
+      <div class="section-title">Hospital Identity</div>
+      <div class="section-sub">Registration and contact details</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="field-grid">
+      <div class="field">
+        <label class="field-label">Hospital Name <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="hospitalName" placeholder="e.g. Amritanjan Hospital" required>
+      </div>
+      <div class="field">
+        <label class="field-label">Legal Entity Name <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="legalEntity" required placeholder="e.g. Amrit Group of Institutions">
+      </div>
+      <div class="field">
+        <label class="field-label">Registered Address <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="address" required placeholder="Full address">
+      </div>
+      <div class="field">
+        <label class="field-label">State <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="state" placeholder="e.g. Maharashtra" required>
+      </div>
+      <div class="field">
+        <label class="field-label">District <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="district" placeholder="e.g. Pune" required>
+      </div>
+      <div class="field">
+        <label class="field-label">Pin Code <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="pinCode" required placeholder="6-digit pin code" maxlength="6">
+      </div>
+      <div class="field">
+        <label class="field-label">Ownership Type <span style="color:#e74c3c">*</span></label>
+        <select id="ownershipType" required>
+          <option value="">— Select —</option>
+          <option>Private</option>
+          <option>Public / Government</option>
+          <option>Trust / NGO</option>
+          <option>PPP</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Number of Locations (if chain) <span style="color:#e74c3c">*</span></label>
+        <input type="number" id="numLocations" required placeholder="0 if single" min="0">
+      </div>
+      <div class="field">
+        <label class="field-label">Contact Person <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="contactPerson" required placeholder="Full name">
+      </div>
+      <div class="field">
+        <label class="field-label">Designation <span style="color:#e74c3c">*</span></label>
+        <input type="text" id="designation" required placeholder="e.g. Medical Superintendent">
+      </div>
+      <div class="field">
+        <label class="field-label">Email ID <span style="color:#e74c3c">*</span></label>
+        <input type="email" id="email" placeholder="hospital@example.com" required>
+      </div>
+      <div class="field">
+        <label class="field-label">Mobile Number <span style="color:#e74c3c">*</span></label>
+        <input type="tel" id="mobile" required placeholder="10-digit mobile" maxlength="10">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SECTION 2: CAPABILITY PARAMETERS ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">⚡</div>
+    <div>
+      <div class="section-title">Capability Parameters</div>
+      <div class="section-sub">Infrastructure, clinical capability and quality systems</div>
+    </div>
+    <div class="section-pts">40 pts</div>
+  </div>
+  <div class="section-body">
+
+    <div class="field" id="field-p01">
+      <label class="field-label">P01 — Total Beds & Functional Bed Strength <span class="field-weight">(weight: 10)</span></label>
+      <div class="field-hint">Total number of operational beds available for inpatient care</div>
+      <select id="p01" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Less than 50 beds">Less than 50 beds</option>
+        <option value="1|50–100 beds">50–100 beds</option>
+        <option value="2|101–200 beds">101–200 beds</option>
+        <option value="3|201–500 beds">201–500 beds</option>
+        <option value="4|501–1000 beds">501–1000 beds</option>
+        <option value="5|More than 1000 beds">More than 1000 beds</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p02">
+      <label class="field-label">P02 — ICU Beds as % of Total Beds <span class="field-weight">(weight: 8)</span></label>
+      <div class="field-hint">Proportion of ICU beds relative to total inpatient beds</div>
+      <select id="p02" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Less than 2%">Less than 2%</option>
+        <option value="1|2–3%">2–3%</option>
+        <option value="2|3–5%">3–5%</option>
+        <option value="3|5–8%">5–8%</option>
+        <option value="4|8–12%">8–12%</option>
+        <option value="5|More than 12%">More than 12%</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p04">
+      <label class="field-label">P03 — Staff : Bed Ratio <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Number of clinical and support staff relative to number of beds</div>
+      <select id="p04" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Severe staffing gaps">Severe staffing gaps</option>
+        <option value="1|Less than 1:1">Less than 1:1</option>
+        <option value="2|1:1">1:1</option>
+        <option value="3|1.5:1">1.5:1</option>
+        <option value="4|2:1">2:1</option>
+        <option value="5|More than 2.5:1">More than 2.5:1</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p05">
+      <label class="field-label">P04 — Diagnostics Level 1 (Radiology) <span class="field-weight">(weight: 8)</span></label>
+      <div class="field-hint">Level of diagnostic imaging capability available on-site</div>
+      <select id="p05" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|X-Ray only">X-Ray only</option>
+        <option value="1|X-Ray + USG">X-Ray + USG</option>
+        <option value="2|X-Ray + USG + CT">X-Ray + USG + CT</option>
+        <option value="3|X-Ray + USG + CT + MRI">X-Ray + USG + CT + MRI</option>
+        <option value="4|X-Ray + USG + CT + MRI + PET">X-Ray + USG + CT + MRI + PET</option>
+        <option value="5|Full Nuclear / Molecular Modalities">Full Nuclear / Molecular Modalities</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p06">
+      <label class="field-label">P05 — Diagnostics Level 2 (Advanced Procedures) <span class="field-weight">(weight: 7)</span></label>
+      <div class="field-hint">Advanced procedural and life-support capabilities available on-site</div>
+      <select id="p06" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No advanced procedural capability">No advanced procedural capability</option>
+        <option value="1|Cath Lab only">Cath Lab only</option>
+        <option value="2|Cath Lab + Interventional Radiology">Cath Lab + Interventional Radiology</option>
+        <option value="3|Cath Lab + Interventional Radiology + ECMO">Cath Lab + Interventional Radiology + ECMO</option>
+        <option value="4|Cath Lab + Interventional Radiology + ECMO + Robotics">Cath Lab + Interventional Radiology + ECMO + Robotics</option>
+        <option value="5|Cath Lab + Interventional Radiology + ECMO + Robotics + Transplant Services">Cath Lab + Interventional Radiology + ECMO + Robotics + Transplant Services</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p07">
+      <label class="field-label" id="lbl-p07">P06 — Infection Control Measures <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Extent of formal systems for infection prevention and control</div>
+      <select id="p07" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No formal infection prevention system">No formal infection prevention system</option>
+        <option value="1|Basic BMW Rules compliance only">Basic Biomedical Waste Management (BMW) Rules compliance only</option>
+        <option value="2|Antimicrobial Stewardship Program (AMSP) only">Antimicrobial Stewardship Program (AMSP) only</option>
+        <option value="3|AMSP + Hospital Acquired Infection Tracking">AMSP + Hospital Acquired Infection Tracking</option>
+        <option value="4|Comprehensive and full IPC systems">Comprehensive and full Infection Prevention & Control systems</option>
+        <option value="5|Benchmarked — National / Global standards met">Benchmarked — National / Global comparison standards met</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p08">
+      <label class="field-label" id="lbl-p08">P07 — Data Availability <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Hospital's ability to capture, maintain, and analyze core operational data</div>
+      <select id="p08" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Entirely manual or paper-based records">Entirely manual or paper-based records</option>
+        <option value="1|Ad-hoc / Billing-Driven (TPA only)">Ad-hoc / Billing-Driven — Data exists only for bills and insurance (TPA)</option>
+        <option value="2|Basic Centralized Hospital Information System (HIS)">Basic Centralized Hospital Information System (HIS) exists</option>
+        <option value="3|Departmental / MIS Reporting">Departmental / MIS Reporting — Specialty-wise data tracking</option>
+        <option value="4|Tracking Quality Indicators (NABH KPIs)">Tracking Quality Indicators (NABH KPIs — mandatory clinical quality metrics)</option>
+        <option value="5|Integrated Dashboards (Live EMR)">Integrated Dashboards: Comprehensive clinical and operational (Live EMR)</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p09">
+      <label class="field-label" id="lbl-p09">P08 — Regulatory Compliance (License to Operate) <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Completeness and validity of essential regulatory approvals</div>
+      <select id="p09" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No License — Operating without valid registration">No License — Operating without valid registration</option>
+        <option value="1|Temporary / Applied (provisional / renewal pending)">Temporary / Applied — Provisional certificate or renewal pending</option>
+        <option value="2|Basic License Only (state/municipal nursing home license)">Basic License Only — Permanent state or municipal nursing home license</option>
+        <option value="3|License + Basic Safety (Fire NOC + Pollution Control)">License + Basic Safety — Fire NOC and Pollution Control Board clearance</option>
+        <option value="4|All Equipment Licenses (PCPNDT, AERB active permits)">All Equipment Licenses — Level 3 plus active permits (PCPNDT, AERB)</option>
+        <option value="5|Zero-Deficiency Status — Every license active, zero expired">Zero-Deficiency Status — Every single license active, zero expired papers</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p10">
+      <label class="field-label">P09 — Accreditation Status / Level <span class="field-weight">(weight: 8)</span></label>
+      <div class="field-hint">Level of external accreditation attained by the hospital</div>
+      <select id="p10" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No accreditation">No accreditation</option>
+        <option value="1|Applied for NABH Entry-Level certification">Applied for NABH Entry-Level certification</option>
+        <option value="2|Holds NABH Entry-Level certification">Holds NABH Entry-Level certification</option>
+        <option value="3|Holds NABH Entry-Level and Applied for Full NABH">Holds NABH Entry-Level and Applied for Full NABH Accreditation</option>
+        <option value="4|Holds Full NABH Accreditation">Holds Full NABH Accreditation</option>
+        <option value="5|Holds Full NABH + JCI or equivalent International Accreditation">Holds Full NABH + JCI or equivalent International Accreditation</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p11">
+      <label class="field-label">P10 — IT Capability / ABDM Readiness <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Hospital's digital maturity and interoperability with ABDM or similar frameworks</div>
+      <select id="p11" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Manual / Paper-based">Manual / Paper-based</option>
+        <option value="1|Fragmented / Basic Billing only">Fragmented / Basic Billing only</option>
+        <option value="2|Basic Central HIS (registration, pharmacy, laboratory)">Basic Central HIS — manages registration, pharmacy, and laboratory data</option>
+        <option value="3|Integrated EMR (bedside / OPD digital prescriptions)">Integrated EMR — Doctors enter prescriptions digitally at bedside / OPD</option>
+        <option value="4|ABDM Milestone 1 (ABHA Linked)">ABDM Milestone 1 (ABHA Linked) — Digital health records with ABHA IDs</option>
+        <option value="5|Full ABDM Compliant (linked with NHCX)">Full ABDM Compliant — Fully linked with NHCX for paperless insurance</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p12">
+      <label class="field-label">P11 — Academia and Research (DNB Programmes) <span class="field-weight">(weight: 7)</span></label>
+      <div class="field-hint">Number of accredited DNB / NBEMS postgraduate specialty seats</div>
+      <select id="p12" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|None — No accredited DNB or NBEMS postgraduate seats">None — No accredited DNB or NBEMS postgraduate seats</option>
+        <option value="1|1–2 specialties">1–2 specialties</option>
+        <option value="2|3–5 specialties">3–5 specialties</option>
+        <option value="3|6–8 specialties">6–8 specialties</option>
+        <option value="4|9–12 specialties">9–12 specialties</option>
+        <option value="5|More than 12 specialties">More than 12 specialties</option>
+      </select>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ SECTION 3: CONDUCT PARAMETERS ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">✓</div>
+    <div>
+      <div class="section-title">Conduct Parameters</div>
+      <div class="section-sub">Claims performance, billing integrity and scheme participation</div>
+    </div>
+    <div class="section-pts">40 pts</div>
+  </div>
+  <div class="section-body">
+
+    <div class="field" id="field-p13">
+      <label class="field-label">P12 — Claim Acceptance Performance <span class="field-weight">(weight: 12)</span></label>
+      <div class="field-hint">Proportion of insurance / cashless claims successfully approved on first submission</div>
+      <select id="p13" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Less than 70% acceptance">Less than 70% acceptance</option>
+        <option value="1|70–80% acceptance">70–80% acceptance</option>
+        <option value="2|81–85% acceptance">81–85% acceptance</option>
+        <option value="3|85–90% acceptance">85–90% acceptance</option>
+        <option value="4|90–95% acceptance">90–95% acceptance</option>
+        <option value="5|Greater than 95% acceptance">Greater than 95% acceptance</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p14">
+      <label class="field-label">P13 — Settlement Turnaround Time (TAT) Compliance <span class="field-weight">(weight: 8)</span></label>
+      <div class="field-hint">Ability to complete pre-auth claims / approvals + discharge processing within agreed SLAs</div>
+      <select id="p14" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|More than 10 hrs">More than 10 hrs</option>
+        <option value="1|8–10 hrs">8–10 hrs</option>
+        <option value="2|6–8 hrs">6–8 hrs</option>
+        <option value="3|4–6 hrs">4–6 hrs</option>
+        <option value="4|2–4 hrs">2–4 hrs</option>
+        <option value="5|Less than 2 hrs">Less than 2 hrs</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p15">
+      <label class="field-label">P14 — Payment Completeness <span class="field-weight">(weight: 8)</span></label>
+      <div class="field-hint">Gap between amount billed under agreed tariffs and amounts actually settled</div>
+      <select id="p15" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|Severe Shortfall — Hospital recovers less than 65% of billed amount">Severe Shortfall — Hospital recovers less than 65% of billed amount</option>
+        <option value="1|Hospital recovers 65% to 75% of billed amount">Hospital recovers 65% to 75% of billed amount</option>
+        <option value="2|Hospital recovers 75% to 85% of billed amount">Hospital recovers 75% to 85% of billed amount</option>
+        <option value="3|Hospital recovers 85% to 95% of billed amount">Hospital recovers 85% to 95% of billed amount</option>
+        <option value="4|Hospital recovers over 95% of billed amount">Hospital recovers over 95% of billed amount</option>
+        <option value="5|Near Complete Settlement — Almost 100% recovery">Near Complete Settlement — Almost 100% recovery with negligible deductions</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p16">
+      <label class="field-label">P15 — Document Quality & Query Management <span class="field-weight">(weight: 5)</span></label>
+      <div class="field-hint">Average number of clarification rounds exchanged with insurance companies per claim</div>
+      <select id="p16" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|More than 6 rounds">More than 6 rounds</option>
+        <option value="1|5 rounds">5 rounds</option>
+        <option value="2|4 rounds">4 rounds</option>
+        <option value="3|3 rounds">3 rounds</option>
+        <option value="4|2 rounds">2 rounds</option>
+        <option value="5|1 round">1 round</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p17">
+      <label class="field-label">P16 — Scheme Participation <span class="field-weight">(weight: 4)</span></label>
+      <div class="field-hint">Government health insurance schemes participated in (CGHS + ESI + ECHS + PMJAY + PSU schemes)</div>
+      <select id="p17" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No schemes">No schemes</option>
+        <option value="1|1 scheme">1 scheme</option>
+        <option value="2|2 schemes">2 schemes</option>
+        <option value="3|3 schemes">3 schemes</option>
+        <option value="4|4 schemes">4 schemes</option>
+        <option value="5|5 schemes">5 schemes</option>
+      </select>
+    </div>
+
+    <div class="field" id="field-p18">
+      <label class="field-label">P17 — Fraud Flags & Internal Billing Controls <span class="field-weight">(weight: 3)</span></label>
+      <div class="field-hint">Internal billing controls and documentation audit systems to prevent external fraud flags</div>
+      <select id="p18" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="0|No Centralised Clinical Review Team">No Centralised Clinical Review Team</option>
+        <option value="1|Reactive Fixing — No file audits, only responds when insurer flags a bill">Reactive Fixing — No file audits; only responds when insurer formally flags a bill</option>
+        <option value="2|Basic Supervisor Review before submission">Basic Supervisor Review before submission</option>
+        <option value="3|Standard Insurance TPA Audit — Dedicated TPA team reviews patient files">Standard Insurance TPA Audit — Dedicated TPA team reviews patient files</option>
+        <option value="4|Medical Auditor Review — Senior doctor audits clinical files">Medical Auditor Review — Senior doctor audits clinical files</option>
+        <option value="5|Real-Time Software + Medical Audit — Automated billing + independent audit committee">Real-Time Software + Medical Audit — Automated billing + independent audit committee</option>
+      </select>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ SECTION 4: GEOGRAPHY ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">📍</div>
+    <div>
+      <div class="section-title">Geography Parameter</div>
+      <div class="section-sub">Hospital location tier</div>
+    </div>
+    <div class="section-pts">20 pts</div>
+  </div>
+  <div class="section-body">
+    <div class="field" id="field-p19">
+      <label class="field-label">P18 — Location of the Hospital <span class="field-weight">(weight: 20)</span></label>
+      <div class="field-hint">Select the tier that best describes the hospital's primary location</div>
+      <select id="p19" onchange="recalc()">
+        <option value="">— Select —</option>
+        <option value="1|Rural / Remote Area">Rural / Remote Area</option>
+        <option value="2|Tier II / III City">Tier II / III City</option>
+        <option value="3|Tier I City">Tier I City</option>
+        <option value="4|Metro City">Metro City</option>
+        <option value="5|Top Metro (Mumbai / Delhi / Bangalore / Chennai / Hyderabad / Kolkata)">Top Metro (Mumbai / Delhi / Bangalore / Chennai / Hyderabad / Kolkata)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SECTION 5: DECLARATION ════ -->
+<div class="section-card">
+  <div class="section-head">
+    <div class="section-icon">📋</div>
+    <div>
+      <div class="section-title">Declaration</div>
+      <div class="section-sub">Confirmation before submission</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <p style="font-size:13px;color:var(--gray-600);line-height:1.6;margin-bottom:14px">
+      By submitting this form, the hospital confirms that all information provided is true, accurate, and supported by documentary evidence available for verification upon request. The categorizing authority reserves the right to audit and verify all submitted data before any final categorization decision.
+    </p>
+    <div class="declare-wrap">
+      <input type="checkbox" id="agree" onchange="checkReady()">
+      <label class="declare-text" for="agree">
+        I confirm that all information submitted is accurate, complete, and can be supported by documentary evidence upon request.
+      </label>
+    </div>
+    <div class="submit-wrap" style="margin-top:20px">
+      <button class="btn-submit" id="btn-submit" onclick="submitForm()" disabled>
+        Submit & View Score
+      </button>
+      <p class="submit-note">Score is calculated instantly after submission. All responses are securely stored.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── CONFIGURATION ──────────────────────────────────────────────
+// IMPORTANT: Replace the URL below with your deployed Apps Script Web App URL
+const APPS_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+// ───────────────────────────────────────────────────────────────
+
+// Parameter config: id → [weight, category]
+const PARAMS = {
+  p01: [10, 'cap'], p02: [8, 'cap'], p04: [5, 'cap'],
+  p05: [8, 'cap'], p06: [7, 'cap'], p07: [5, 'cap'],
+  p08: [5, 'cap'], p09: [5, 'cap'], p10: [8, 'cap'],
+  p11: [5, 'cap'], p12: [7, 'cap'],
+  p13: [12, 'con'], p14: [8, 'con'], p15: [8, 'con'],
+  p16: [5, 'con'], p17: [4, 'con'], p18: [3, 'con'],
+  p19: [20, 'geo']
+};
+
+const CAP_PARAMS = ['p01','p02','p04','p05','p06','p07','p08','p09','p10','p11','p12'];
+const CON_PARAMS = ['p13','p14','p15','p16','p17','p18'];
+const GEO_PARAMS = ['p19'];
+
+const CAP_MAX_W = CAP_PARAMS.reduce((s,id) => s + PARAMS[id][0], 0); // 73
+const CON_MAX_W = CON_PARAMS.reduce((s,id) => s + PARAMS[id][0], 0); // 40
+const GEO_MAX_W = GEO_PARAMS.reduce((s,id) => s + PARAMS[id][0], 0); // 20
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  if (!el || !el.value) return null;
+  return parseInt(el.value.split('|')[0]);
+}
+function getLabel(id) {
+  const el = document.getElementById(id);
+  if (!el || !el.value) return '';
+  return el.value.split('|')[1] || '';
+}
+
+function weightedScore(params, maxW, targetMax) {
+  let sumW = 0, totalW = 0;
+  params.forEach(id => {
+    const v = getVal(id);
+    if (v !== null) {
+      sumW += v * PARAMS[id][0];
+      totalW += 5 * PARAMS[id][0];
+    }
+  });
+  if (totalW === 0) return 0;
+  return (sumW / maxW / 5) * targetMax;
+}
+
+function calcScores() {
+  const cap = weightedScore(CAP_PARAMS, CAP_MAX_W, 40);
+  const con = weightedScore(CON_PARAMS, CON_MAX_W, 40);
+  const geo = weightedScore(GEO_PARAMS, GEO_MAX_W, 20);
+  return { cap, con, geo, total: cap + con + geo };
+}
+
+function getCategory(total) {
+  if (total >= 85) return 'A* — Preferred Empanelled';
+  if (total >= 70) return 'A — Standard Empanelled';
+  if (total >= 55) return 'B — Conditional Empanelled';
+  if (total >= 40) return 'C — Probationary Review';
+  return 'D — Not Empanelled';
+}
+
+function getCategoryStyle(cat) {
+  const map = {
+    'A* — Preferred Empanelled': { bg:'#d4edda', color:'#155724', border:'#155724' },
+    'A — Standard Empanelled':   { bg:'#d1ecf1', color:'#0c5460', border:'#0c5460' },
+    'B — Conditional Empanelled': { bg:'#fff3cd', color:'#856404', border:'#856404' },
+    'C — Probationary Review':   { bg:'#fde8d8', color:'#7c3400', border:'#7c3400' },
+    'D — Not Empanelled':        { bg:'#f8d7da', color:'#721c24', border:'#721c24' }
+  };
+  return map[cat] || { bg:'#f8f9fa', color:'#6c757d', border:'#6c757d' };
+}
+
+function recalc() {
+  const { cap, con, geo, total } = calcScores();
+  const allDone = [...Object.keys(PARAMS)].every(id => getVal(id) !== null);
+  const answered = Object.keys(PARAMS).filter(id => getVal(id) !== null).length;
+  const pct = (answered / 18 * 100).toFixed(0);
+
+  document.getElementById('prog-fields').textContent = `${answered} of 18 parameters answered`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-bar').style.width = pct + '%';
+
+  if (answered > 0) {
+    document.getElementById('d-cap').textContent = cap.toFixed(1);
+    document.getElementById('d-con').textContent = con.toFixed(1);
+    document.getElementById('d-geo').textContent = geo.toFixed(1);
+    document.getElementById('d-total').textContent = total.toFixed(1);
+    document.getElementById('hdr-score').textContent = total.toFixed(1) + '/100';
+    if (allDone) {
+      const cat = getCategory(total);
+      const st = getCategoryStyle(cat);
+      const badge = document.getElementById('d-badge');
+      badge.textContent = cat;
+      badge.style.background = st.bg;
+      badge.style.color = st.color;
+    }
+  }
+
+  // Mark answered fields
+  Object.keys(PARAMS).forEach(id => {
+    const field = document.getElementById('field-' + id);
+    if (field) field.classList.toggle('field-answered', getVal(id) !== null);
+  });
+
+  checkReady();
+}
+
+function checkReady() {
+  const allDone = [...Object.keys(PARAMS)].every(id => getVal(id) !== null);
+  const agreed = document.getElementById('agree').checked;
+  const mandatoryFields = ['hospitalName','legalEntity','address','state','district','pinCode','ownershipType','numLocations','contactPerson','designation','email','mobile'];
+  const allIdentity = mandatoryFields.every(id => {
+    const el = document.getElementById(id);
+    return el && el.value.trim().length > 0;
+  });
+  document.getElementById('btn-submit').disabled = !(allDone && agreed && allIdentity);
+}
+
+function applyNABH() {
+  const v = document.getElementById('nabh_jci').value;
+  const isYes = v.startsWith('Yes');
+  document.getElementById('nabh-banner').classList.toggle('show', isYes);
+
+  const autoParams = ['p07', 'p08', 'p09'];
+  autoParams.forEach(id => {
+    const sel = document.getElementById(id);
+    const lbl = document.getElementById('lbl-' + id);
+    if (isYes) {
+      // Set to max score (5) — pick the last option (value starts with 5|)
+      Array.from(sel.options).forEach(o => {
+        if (o.value.startsWith('5|')) sel.value = o.value;
+      });
+      sel.disabled = true;
+      if (lbl) lbl.innerHTML = lbl.innerHTML.replace(' <span class="nabh-tag">', '') + ' <span class="nabh-tag">Auto-set (NABH/JCI)</span>';
+    } else {
+      sel.disabled = false;
+      sel.value = '';
+      if (lbl) lbl.innerHTML = lbl.innerHTML.replace(' <span class="nabh-tag">Auto-set (NABH/JCI)</span>', '');
+    }
+  });
+  recalc();
+}
+
+function buildBreakdown(params, maxW, targetMax) {
+  return params.map(id => {
+    const v = getVal(id);
+    const label = getLabel(id);
+    const w = PARAMS[id][0];
+    const rawScore = v !== null ? v : 0;
+    const pts = (rawScore * w / (5 * maxW) * targetMax);
+    const pct = (rawScore / 5 * 100).toFixed(0);
+    const paramNames = {
+      p01:'Total Beds', p02:'ICU Beds %', p04:'Staff:Bed Ratio',
+      p05:'Diagnostics L1', p06:'Diagnostics L2', p07:'Infection Control',
+      p08:'Data Availability', p09:'Regulatory Compliance', p10:'Accreditation',
+      p11:'IT / ABDM', p12:'Academia & Research',
+      p13:'Claim Acceptance', p14:'TAT Compliance', p15:'Payment Completeness',
+      p16:'Doc Quality', p17:'Scheme Participation', p18:'Fraud Controls',
+      p19:'Location'
+    };
+    return `<div class="param-row">
+      <div class="param-name">${paramNames[id] || id}</div>
+      <div class="param-answer">${label || '—'}</div>
+      <div class="param-score-bar"><div class="param-score-fill" style="width:${pct}%"></div></div>
+      <div class="param-pts">${pts.toFixed(1)}</div>
+    </div>`;
+  }).join('');
+}
+
+async function submitForm() {
+  const { cap, con, geo, total } = calcScores();
+  const category = getCategory(total);
+  const hospitalName = document.getElementById('hospitalName').value.trim();
+
+  // Populate result panel
+  document.getElementById('res-name').textContent = hospitalName;
+  document.getElementById('res-date').textContent = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('res-total').textContent = total.toFixed(1);
+  document.getElementById('res-cap').textContent = cap.toFixed(1);
+  document.getElementById('res-con').textContent = con.toFixed(1);
+  document.getElementById('res-geo').textContent = geo.toFixed(1);
+  document.getElementById('res-cat').textContent = category;
+
+  const st = getCategoryStyle(category);
+  const banner = document.getElementById('res-cat-banner');
+  banner.style.background = st.bg;
+  banner.style.color = st.color;
+  banner.style.borderColor = st.border;
+
+  document.getElementById('cap-breakdown').innerHTML = buildBreakdown(CAP_PARAMS, CAP_MAX_W, 40);
+  document.getElementById('con-breakdown').innerHTML = buildBreakdown(CON_PARAMS, CON_MAX_W, 40);
+  document.getElementById('geo-breakdown').innerHTML = buildBreakdown(GEO_PARAMS, GEO_MAX_W, 20);
+
+  document.getElementById('result-panel').classList.add('show');
+  document.getElementById('result-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Build payload
+  const payload = {
+    hospitalName,
+    legalEntity: document.getElementById('legalEntity').value,
+    address: document.getElementById('address').value,
+    state: document.getElementById('state').value,
+    district: document.getElementById('district').value,
+    pinCode: document.getElementById('pinCode').value,
+    ownershipType: document.getElementById('ownershipType').value,
+    numLocations: document.getElementById('numLocations').value,
+    contactPerson: document.getElementById('contactPerson').value,
+    designation: document.getElementById('designation').value,
+    email: document.getElementById('email').value,
+    mobile: document.getElementById('mobile').value,
+    nabhJci: document.getElementById('nabh_jci').value,
+    capabilityScore: cap.toFixed(2),
+    conductScore: con.toFixed(2),
+    geographyScore: geo.toFixed(2),
+    totalScore: total.toFixed(2),
+    category,
+    p01: getLabel('p01'), p02: getLabel('p02'), p04: getLabel('p04'),
+    p05: getLabel('p05'), p06: getLabel('p06'), p07: getLabel('p07'),
+    p08: getLabel('p08'), p09: getLabel('p09'), p10: getLabel('p10'),
+    p11: getLabel('p11'), p12: getLabel('p12'), p13: getLabel('p13'),
+    p14: getLabel('p14'), p15: getLabel('p15'), p16: getLabel('p16'),
+    p17: getLabel('p17'), p18: getLabel('p18'), p19: getLabel('p19')
+  };
+
+  // Send to Google Sheets
+  const msg = document.getElementById('sending-msg');
+  msg.textContent = 'Saving to database…';
+  msg.className = 'sending-msg';
+
+  if (APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
+    msg.textContent = '⚠ Apps Script URL not configured — score shown above but not saved to database. See setup instructions in Code.gs.';
+    msg.className = 'sending-msg err';
+    return;
+  }
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors'
+    });
+    msg.textContent = '✓ Saved to database successfully.';
+    msg.className = 'sending-msg ok';
+  } catch (err) {
+    msg.textContent = '⚠ Could not save to database. Score shown above is accurate. Please contact the administrator.';
+    msg.className = 'sending-msg err';
+  }
+}
+
+function resetForm() {
+  document.getElementById('result-panel').classList.remove('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initialize
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('change', checkReady);
+});
+</script>
+</body>
+</html>
